@@ -10,6 +10,6 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add && \
 RUN mkdir /app_blog
 WORKDIR /app_blog
 
-COPY ./*.sh /scripts/
+COPY  ./app/*.sh /scripts/
 
 RUN chmod +x /scripts/*.sh

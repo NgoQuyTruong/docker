@@ -5,26 +5,26 @@ services:
       - db
     build:
       context: ./docker # thư mục chứa Dockerfile muốn build app
-      dockerfile: ./docker/app/Dockerfile
+      dockerfile: ./app/Dockerfile
     
     volumes:
       - ./application/blog:/app_blog
       - bundle_volumes:/usr/local/bundle
     command: sh /scripts/command.sh
     ports:
-      - 3000:3000
+      - 5000:5000
   
   db:
     build:
       context: ./database
-      dockerfile: ./database/Dockerfile.postgresql
+      dockerfile: ./Dockerfile.postgresql
     environment:
-      POSTGRES_USER=vareal
-      POSTGRES_PASSWORD=vareal
+      - POSTGRES_USER=vareal
+      - POSTGRES_PASSWORD=vareal
     volumes:
       - db_volumes:/var/lib/postgresql/data
     ports:
-      - 5432:5432
+      - 5433:5432
 
 volumes:
   bundle_volumes:
