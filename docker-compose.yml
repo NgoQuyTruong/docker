@@ -1,0 +1,33 @@
+version: '3.0'
+services:
+  app:
+    depends_on:
+      - db
+    build:
+      context: ./docker # thư mục chứa Dockerfile muốn build app
+      dockerfile: ./docker/app/Dockerfile
+    
+    volumes:
+      - ./application/blog:/app_blog
+      - bundle_volumes:/usr/local/bundle
+    command: sh /scripts/command.sh
+    ports:
+      - 3000:3000
+  
+  db:
+    build:
+      context: ./database
+      dockerfile: ./database/Dockerfile.postgresql
+    environment:
+      POSTGRES_USER=vareal
+      POSTGRES_PASSWORD=vareal
+    volumes:
+      - db_volumes:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
+
+volumes:
+  bundle_volumes:
+  db_volumes:
+
+
