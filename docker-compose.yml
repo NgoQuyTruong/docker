@@ -8,24 +8,26 @@ services:
       dockerfile: ./app/Dockerfile
     
     volumes:
-      - ./application/blog:/app_blog
+      - ./application/app_1_postgres:/my_app
       - bundle_volumes:/usr/local/bundle
     command: sh /scripts/command.sh
     ports:
       - 5000:5000
-  
+
+  # config for postgresql
   db:
     build:
       context: ./database
-      dockerfile: ./Dockerfile.postgresql
+      dockerfile: ./Dockerfile.postgresql #tùy chọn file Dockerfile trong /database để config
     environment:
       - POSTGRES_USER=vareal
       - POSTGRES_PASSWORD=vareal
     volumes:
       - db_volumes:/var/lib/postgresql/data
     ports:
-      - 5433:5432
+      - 5433:5432 #5432 ở local đang có dự án dùng nên đổi qua 5433
 
+  # config for postgresql
 volumes:
   bundle_volumes:
   db_volumes:

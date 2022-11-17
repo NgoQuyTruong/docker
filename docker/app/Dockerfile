@@ -5,10 +5,12 @@ RUN curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add && \
     echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list && \
     apt update && \
     apt -y install nodejs \
-    yarn
+    yarn \
+    build-essential \
+    libpq-dev
 
-RUN mkdir /app_blog
-WORKDIR /app_blog
+RUN mkdir /my_app
+WORKDIR /my_app
 
 COPY  ./app/*.sh /scripts/
 
